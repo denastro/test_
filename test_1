@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+long int karatsuba (int x, int y)
+{
+  
+  
+       if ( x/10 <1 || y/10 <1)         /* The base case */
+    {                        
+      
+        printf ("%d\n", x*y);
+
+        return x*y;
+
+    }
+    else 
+    {
+      int c1=0,c2=0,x1,y1,n,n1;
+     x1=x;
+     y1=y;
+      while (x1>=1)
+      {
+        x1=x1/10;
+        c1=c1+1;
+      }
+      while (y1>=1)
+      {
+        y1=y1/10;
+        c2=c2+1;
+      }
+      if (c1>c2)
+      {
+      n=c1;
+     }
+      else
+      {
+      n=c2;
+    }
+      n1=n/2;
+      int a,b,c,d;
+
+      a=x/(pow(10,n1));
+      b=x-a*pow(10,n1);
+      c=y/(pow(10,n1));
+      d=y-c*pow(10,n1);
+     
+    long p= (pow(10,2*n1)*karatsuba(a,c)) + ((pow(10,n1)) *((karatsuba(a+b,c+d)-karatsuba(a,c)-karatsuba(b,d))))+karatsuba(b,d);
+
+    printf ("karatsuba %ld\n", p);
+
+
+    return p;
+
+    }
+  
+}
+
+int main()
+{
+  int x=999222, y=725222;
+  long int p= karatsuba(x,y);
+  printf ("%ld\n", p);
+  printf( "\n");
+}
